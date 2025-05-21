@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "deploy": "next build && type nul > out/.nojekyll && gh-pages -d out",
+    "fix-paths": "node ./scripts/fixStaticPaths.js",
+    "deploy": "next build && npm run fix-paths && gh-pages -d out",
     "start": "next start",
     "lint": "next lint"
   },

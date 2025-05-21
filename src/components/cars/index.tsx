@@ -2,6 +2,7 @@ import React from 'react';
 import carsData from '@/data/cars.json';
 import Image from 'next/image';
 import { Car } from './types';
+import { assetsHelper } from '@/utils/assetsHelper';
 const Cars = () => {
 
     const cars: Car[] = carsData;
@@ -16,7 +17,7 @@ const Cars = () => {
                                 ?   <div className='w-full h-[300px] bg-gray-200 flex items-center justify-center rounded-t-[20px]'>
                                         <p className='text-black text-[18px]/[22px] font-bold'>Imagem indisponível</p>
                                     </div>
-                                : <Image src={car.imagem??""} alt={`${car.marca} ${car.modelo}`} width={200} height={150} className="w-full h-full max-h-[240px] lg:min-h-[300px] lg:max-h-[300px] rounded-t-[20px]" />
+                                : <Image src={car.imagem ? assetsHelper(car.imagem) : ""} alt={`${car.marca} ${car.modelo}`} width={200} height={150} className="w-full h-full max-h-[240px] lg:min-h-[300px] lg:max-h-[300px] rounded-t-[20px]" />
                             } 
                             <div className="p-6 flex flex-col justify-between gap-2 h-full">
                                 <div className="flex flex-col gap-2">

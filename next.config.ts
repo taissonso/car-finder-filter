@@ -8,8 +8,7 @@ const nextConfig: any = {
 if (process.env.NODE_ENV === 'production') {
   nextConfig.output = 'export';
   nextConfig.basePath = '/car-finder-filter';
-  nextConfig.assetPrefix = '/car-finder-filter'; 
-  nextConfig.trailingSlash = true;
+  nextConfig.assetPrefix = '/car-finder-filter';
 }
 
 module.exports = nextConfig;
