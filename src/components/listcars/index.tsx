@@ -1,10 +1,64 @@
-import Cars from "../cars";
+"use client";
+import { useState, useEffect } from 'react';
+import Car from "../Cars";
+import { Car as CarType } from "../Cars/types";
 
-const ListCars = () => {
+interface ListCarsProps {
+    filteredCars: CarType[];
+}
+
+const ListCars = ({ filteredCars }: ListCarsProps) => {
+    // Estado para primeira carga vs. atualizações de filtro
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+    const [processedCars, setProcessedCars] = useState<CarType[]>([]);
+
+    // Processar dados recebidos
+    useEffect(() => {
+        // Atualizar carros imediatamente sem delay para atualizações
+        if (!isFirstLoad) {
+            setProcessedCars(filteredCars || []);
+            return;
+        }
+
+        // Apenas para primeira carga, usar pequeno delay
+        const timer = setTimeout(() => {
+            setProcessedCars(filteredCars || []);
+            setIsFirstLoad(false);
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [filteredCars, isFirstLoad]);
+
+    if (isFirstLoad) {
+        return (
+            <section className="flex-1">
+                <div className="bg-white p-6 rounded-[20px] text-center">
+                    <p className="text-[#6A6977] text-[18px]/[22px]">Carregando...</p>
+                </div>
+            </section>
+        );
+    }
+
+    if (!processedCars || processedCars.length === 0) {
+        return (
+            <section className="flex-1">
+                <div className="bg-white p-6 rounded-[20px] text-center border border-[#edecf2]">
+                    <p className="text-[#6A6977] text-[18px]/[22px]">
+                        Nenhum carro encontrado com os filtros selecionados.
+                    </p>
+                </div>
+            </section>
+        );
+    }
+
     return (
-        <div className="flex gap-4 flex-wrap w-full">
-            <Cars />
-        </div>
+        <section className="flex-1 h-full min-h-[90vh]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {processedCars.map(car => (
+                    <Car key={car.id} car={car} />
+                ))}
+            </div>
+        </section>
     );
 };
 
