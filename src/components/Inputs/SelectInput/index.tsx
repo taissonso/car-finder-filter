@@ -2,14 +2,20 @@
 import React from "react";
 import { SelectInputProps } from "../types";
 
-const SelectInput: React.FC<SelectInputProps> = ({ label, htmlFor, value, brands, onChange }) => {
+const SelectInput: React.FC<SelectInputProps> = ({
+    label,
+    htmlFor,
+    value,
+    brands,
+    onChange
+}) => {
     return (
-        <div className="flex flex-col gap-2 mb-4">
-            <label className="text-black text-[16px]/[22px] font-medium" htmlFor={htmlFor}>{label}</label>
+        <div className="flex flex-col gap-2">
+            <label className="text-black text-[16px]/[22px] font-medium text-center" htmlFor={htmlFor}>{label}</label>
             <div className="relative">
                 <select
                     id={htmlFor}
-                    className="w-full bg-white border border-[#edecf2] rounded-[20px] py-4 px-3 text-black text-[16px]/[22px] font-medium appearance-none pr-12 capitalize"
+                    className="w-full bg-white border border-[#edecf2] rounded-[4px] py-4 px-3 text-black text-[16px]/[22px] font-medium appearance-none pr-12 capitalize"
                     value={value}
                     onChange={onChange}
                 >
